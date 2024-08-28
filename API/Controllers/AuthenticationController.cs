@@ -1,18 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
 using API.Models;
 using API.DTOs;
+using API.Interfaces;
+using API.Services;
 namespace API.Controllers;
 [ApiController]
 [Route("[controller]")]
-public class AuthenticationController(ILogger<AuthenticationController> logger) : ControllerBase
+public class AuthenticationController : ControllerBase
 {
-    private readonly ILogger<AuthenticationController> _logger = logger;
+    private readonly ILogger<AuthenticationController> _logger;
+    private readonly IUserService _userService;
+    public AuthenticationController(ILogger<AuthenticationController> logger, UserService userService)
+    {
+        _logger = logger;
+        _userService = userService;
+    }
     [HttpPost]
     public IActionResult SignUp([FromBody] User user)
     {
         try
         {
-            return Ok();
+            _logger.LogInformation("Authentication Controller : SignUp Action");
+            _userService.Post(user);
+            return Created();
         }
         catch(Exception e)
         {
@@ -25,7 +35,9 @@ public class AuthenticationController(ILogger<AuthenticationController> logger) 
     {
         try
         {
-            return Ok();
+            _logger.LogInformation("Authentication Controller : SignIn Action");
+            _userService.Get(user);
+            return Accepted();
         }
         catch(Exception e)
         {
