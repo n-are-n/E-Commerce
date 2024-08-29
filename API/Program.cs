@@ -1,8 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 using API.Interfaces;
 using API.Services;
 using API.Repositories;
+using API.Data;
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
+builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis")!)));
+builder.Services.AddDbContext<EcommerceContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddControllers();

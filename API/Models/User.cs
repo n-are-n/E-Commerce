@@ -1,9 +1,12 @@
+using System.ComponentModel.DataAnnotations;
 namespace API.Models;
 public class User
 {
-    public int ID {get; set;}
-    public string Name {get; set;}
-    public string Number {get; set;}
-    public string Mail {get; set;}
-    public string Password {get; set;}
+    [Key]
+    public int Id { get; }
+    public required string Name { get; set; }
+    public required string Number { get; set; }
+    public required string Mail { get; set; }
+    public required string Password { get; set; }
+    public DateTime CreatedAt { get; }
 }

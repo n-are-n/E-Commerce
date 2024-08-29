@@ -1,8 +1,8 @@
-using API.DTOs;
 using API.Models;
+using API.DTOs;
 namespace API.Interfaces;
 public interface IUserService
 {
-    public User Get(UserDTO user);
-    public void Post(User user);
+    public Task<User> Get(UserDTO user);
+    public Task<string?> Post(User user);
 }
