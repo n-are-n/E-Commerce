@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using API.Models;
 using API.DTOs;
 using API.Interfaces;
-using StackExchange.Redis;
 namespace API.Controllers;
 [ApiController]
 [Route("[controller]")]
