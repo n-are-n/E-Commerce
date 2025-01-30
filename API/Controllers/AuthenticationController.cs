@@ -25,12 +25,12 @@ public class AuthenticationController(ILogger<AuthenticationController> logger, 
         }
     }
     [HttpGet(Name = "Login")]
-    public async Task<IActionResult> SignIn([FromQuery] UserDTO userDTO)
+    public /*async Task<*/ IActionResult /*>*/ SignIn([FromQuery] UserDTO userDTO)
     {
         try
         {
             _logger.LogInformation("Authentication Controller : SignIn Action");
-            User user = await _userService.Get(userDTO);
+            User user = /*await*/ _userService.Get(userDTO);
             return Accepted(user);
         }
         catch (Exception e)
