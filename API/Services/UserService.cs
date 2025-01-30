@@ -9,7 +9,7 @@ public class UserService(ILogger<UserService> logger, /*IConnectionMultiplexer r
     private readonly ILogger<UserService> _logger = logger;
     // private readonly IConnectionMultiplexer _redis = redis;
     private readonly IUserRepository _userRpository = userRepository;
-    public async Task<User> Get(UserDTO userDTO)
+    public /*async Task<*/ User /*>*/ Get(UserDTO userDTO)
     {
         try
         {

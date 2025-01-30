@@ -24,10 +24,10 @@ pipeline {
         stage('Build') {
             steps {
                 dir("API") {
-                    bat 'dotnet build --no-restore --configuration Release'
+                    bat 'dotnet build --no-restore'
                 }
                 dir("API.Tests") {
-                    bat 'dotnet build --no-restore --configuration Release'
+                    bat 'dotnet build --no-restore'
                 }
             }
         }
