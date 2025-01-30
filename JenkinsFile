@@ -34,7 +34,7 @@ pipeline {
         stage('Test') {
             steps {
                 dir("API.Tests") {
-                    bat 'dotnet test --no-build'
+                    bat 'dotnet test --no-build --configuration release'
                 }
             }
         }
