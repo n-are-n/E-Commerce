@@ -7,6 +7,7 @@ using API.Repositories;
 using API.Data;
 namespace API.Tests.RepositoriesTests;
 [TestFixture]
+[Author("n-are-n", "naren000000000@gmail.com")]
 public class UserRepositoryTests
 {
     private Mock<ILogger<UserRepository>>? _logger;
