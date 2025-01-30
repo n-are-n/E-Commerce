@@ -3,30 +3,30 @@ pipeline {
     stages {
         stage('Clean') {
             steps {
-                dir("API") {
+                dir("API.Tests") {
                     bat 'dotnet clean'
                 }
-                dir("API.Tests") {
+                dir("API") {
                     bat 'dotnet clean'
                 }
             }
         }
         stage('Restore') {
             steps {
-                dir("API") {
+                dir("API.Tests") {
                     bat 'dotnet restore'
                 }
-                dir("API.Tests") {
+                dir("API") {
                     bat 'dotnet restore'
                 }
             }
         }
         stage('Build') {
             steps {
-                dir("API") {
+                dir("API.Tests") {
                     bat 'dotnet build --no-restore'
                 }
-                dir("API.Tests") {
+                dir("API") {
                     bat 'dotnet build --no-restore'
                 }
             }
@@ -35,13 +35,6 @@ pipeline {
             steps {
                 dir("API.Tests") {
                     bat 'dotnet test --no-build'
-                }
-            }
-        }
-        stage('Run') {
-            steps {
-                dir("API") {
-                    bat 'dotnet run --no-build'
                 }
             }
         }
