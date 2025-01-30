@@ -64,10 +64,10 @@ public class AuthenticationControllerTests
         });
     }
     [Test]
-    public async Task SignIn401Test()
+    public /*async Task*/ void SignIn401Test()
     {
-        _service.Setup(s => s.Get(It.IsAny<UserDTO>())).ThrowsAsync(It.IsAny<Exception>());
-        var result = await _controller!.SignIn(It.IsAny<UserDTO>());
+        _service.Setup(s => s.Get(It.IsAny<UserDTO>())).Throws/*Async*/(It.IsAny<Exception>());
+        var result = /*await*/ _controller!.SignIn(It.IsAny<UserDTO>());
         _service.Verify(s => s.Get(It.IsAny<UserDTO>()), Times.Once);
         _logger.Verify(l => l.Log(LogLevel.Error, It.IsAny<EventId>(), It.Is<It.IsAnyType>((o, t) => o.ToString()!.Contains("Authentication Controller : SignIn Action")), It.IsAny<Exception>(), It.IsAny<Func<It.IsAnyType, Exception?, string>>()), Times.Once);
         var objectResult = result as ObjectResult;
@@ -79,10 +79,10 @@ public class AuthenticationControllerTests
         });
     }
     [Test]
-    public async Task SignIn202Test()
+    public /*async Task*/ void SignIn202Test()
     {
-        _service.Setup(S => S.Get(It.IsAny<UserDTO>())).ReturnsAsync(It.IsAny<User>());
-        var result = await _controller!.SignIn(It.IsAny<UserDTO>());
+        _service.Setup(S => S.Get(It.IsAny<UserDTO>())).Returns/*Async*/(It.IsAny<User>());
+        var result = /*await*/ _controller!.SignIn(It.IsAny<UserDTO>());
         _service.Verify(s => s.Get(It.IsAny<UserDTO>()), Times.Once);
         _logger.Verify(l => l.Log(LogLevel.Information, It.IsAny<EventId>(), It.Is<It.IsAnyType>((o, t) => o.ToString()!.Contains("Authentication Controller : SignIn Action")), It.IsAny<Exception>(), It.IsAny<Func<It.IsAnyType, Exception?, string>>()), Times.Once);
         var objectResult = result as AcceptedResult;
