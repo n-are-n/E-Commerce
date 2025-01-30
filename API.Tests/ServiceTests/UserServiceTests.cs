@@ -1,6 +1,6 @@
 ﻿using Moq;
 using Microsoft.Extensions.Logging;
-using StackExchange.Redis;
+// using StackExchange.Redis;
 using API.Models;
 using API.Interfaces;
 using API.Services;
@@ -11,20 +11,20 @@ namespace API.Tests.ServiceTests;
 public class UserServiceTests
 {
     private Mock<ILogger<UserService>> _logger;
-    private Mock<IDatabase> _idatabase;
-    private Mock<IConnectionMultiplexer> _redis;
+    // private Mock<IDatabase> _idatabase;
+    // private Mock<IConnectionMultiplexer> _redis;
     private Mock<IUserRepository> _repository;
     private UserService? _service;
     [SetUp]
     public void SetUp()
     {
         _logger = new();
-        _idatabase = new();
-        _redis = new();
+        // _idatabase = new();
+        // _redis = new();
         _repository = new();
-        _service = new(_logger.Object, _redis.Object, _repository.Object);
+        _service = new(_logger.Object,/* _redis.Object,*/ _repository.Object);
     }
-    [Test]
+    /*[Test]
     public void GetExceptionTest()
     {
         _redis.Setup(r => r.GetDatabase(It.IsAny<int>(), It.IsAny<object>())).Throws(It.IsAny<Exception>());
@@ -74,7 +74,7 @@ public class UserServiceTests
             Assert.That(result.Mail, Is.EqualTo("mail@domain.com"));
             Assert.That(result.Password, Is.EqualTo("password"));
         });
-    }
+    }*/
     [Test]
     public void PostExceptionTest()
     {
@@ -109,7 +109,7 @@ public class UserServiceTests
     public void TearDown()
     {
         _logger.Reset();
-        _redis.Reset();
+        // _redis.Reset();
         _repository.Reset();
         _service = null;
     }

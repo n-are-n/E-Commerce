@@ -1,13 +1,13 @@
 using API.Models;
 using API.DTOs;
 using API.Interfaces;
-using StackExchange.Redis;
+// using StackExchange.Redis;
 using Newtonsoft.Json;
 namespace API.Services;
-public class UserService(ILogger<UserService> logger, IConnectionMultiplexer redis, IUserRepository userRepository) : IUserService
+public class UserService(ILogger<UserService> logger, /*IConnectionMultiplexer redis,*/ IUserRepository userRepository) : IUserService
 {
     private readonly ILogger<UserService> _logger = logger;
-    private readonly IConnectionMultiplexer _redis = redis;
+    // private readonly IConnectionMultiplexer _redis = redis;
     private readonly IUserRepository _userRpository = userRepository;
     public async Task<User> Get(UserDTO userDTO)
     {
@@ -15,15 +15,15 @@ public class UserService(ILogger<UserService> logger, IConnectionMultiplexer red
         {
             User user;
             _logger.LogInformation("User Service : Get Method");
-            var db = _redis.GetDatabase();
+            /*var db = _redis.GetDatabase();
             RedisValue session = await db.StringGetAsync($"user:{userDTO.Number}");
             if(!session.IsNullOrEmpty) user = JsonConvert.DeserializeObject<User>(session!)!;
             else
-            {
+            {*/
                 user = _userRpository.GetUser(userDTO);
                 string userString = JsonConvert.SerializeObject(user);
-                await db.StringSetAsync($"user:{user.Number}", userString, TimeSpan.FromMinutes(5));
-            }
+                /*await db.StringSetAsync($"user:{user.Number}", userString, TimeSpan.FromMinutes(5));
+            }*/
             return user;
         }
         catch (Exception e)
