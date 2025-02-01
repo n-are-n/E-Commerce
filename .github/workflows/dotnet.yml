@@ -35,6 +35,12 @@ jobs:
     - name: Official SonarQube Scan
     # You may pin to the exact commit or the version.
     # uses: SonarSource/sonarqube-scan-action@bfd4e558cda28cda6b5defafb9232d191be8c203
-      uses: SonarSource/sonarqube-scan-action@v4.2.1
+    - uses: SonarSource/sonarqube-scan-action@v4.2.1
       env:
-          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+        SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+      with:
+        projectBaseDir: ${{ github.workspace }}
+        args: >
+          -Dsonar.projectKey=n-are-n_E-Commerce
+          -Dsonar.organization=Prasad
+          -Dsonar.host.url=https://sonarcloud.io
