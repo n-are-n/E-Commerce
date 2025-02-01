@@ -21,10 +21,14 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Clean Solution
+      working-directory: API
       run: dotnet clean
     - name: Restore dependencies
+      working-directory: API
       run: dotnet restore
     - name: Build
+      working-directory: API
       run: dotnet build --no-restore
     - name: Test
+      working-directory: API.Tests
       run: dotnet test --no-build --verbosity normal
